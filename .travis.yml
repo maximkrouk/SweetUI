@@ -1,0 +1,16 @@
+# references:
+# * https://www.objc.io/issues/6-build-tools/travis-ci/
+# * https://github.com/supermarin/xcpretty#usage
+
+os: osx
+osx_image: xcode11
+language: swift
+
+branches:
+  only:
+  - master
+
+script:
+- gem install cocoapods
+- pod install --project-directory=Example
+- pod lib lint --allow-warnings
