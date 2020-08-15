@@ -9,7 +9,7 @@
 extension FutureLayoutConfiguration {
     typealias FutureLayout = () -> Void
     
-    struct SingleItem {
+    struct SingleItem: Hashable {
         internal init(
             _ wrapped: ConstraintDSL.Single,
             _ priority: UILayoutPriority? = .none
@@ -26,13 +26,13 @@ extension FutureLayoutConfiguration {
 }
 
 struct FutureLayoutConfiguration {
-    var singles: [SingleItem]
+    var singles: Set<SingleItem> = []
     var axisLayouts: [(ConstraintDSL.AxisModifier?) -> FutureLayout] = []
     var dimensionLayouts: [(ConstraintDSL.DimensionModifier?) -> FutureLayout] = []
     var futureLayouts: [FutureLayout] = []
     
     internal init(
-        singles: [SingleItem] = [],
+        singles: Set<SingleItem> = [],
         axisLayouts: [(ConstraintDSL.AxisModifier?) -> FutureLayout] = [],
         dimensionLayouts: [(ConstraintDSL.DimensionModifier?) -> FutureLayout] = [],
         futureLayouts: [FutureLayout] = []

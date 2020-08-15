@@ -10,14 +10,19 @@ public struct ViewProxy<Base: UIView> {
     
     /// Stored view, managed by the DSL.
     public let base: Base
-    public let layout: LayoutProxy<Base>
+    
+    public var layout: LayoutProxy<Base, LayoutProxySteps.Initial> {
+        .init(base, childLayoutConfigurators: [self])
+    }
+    
+    internal var childLayoutConfigurators: [FutureLayoutConfigurator]
     
     /// Initializes and returns a newly allocated dsl object with specified managed view.
     ///
     /// - Parameter content: Closure, that specifies managed view.
-    init(_ base: Base, layout: LayoutProxy<Base>? = nil) {
+    init(_ base: Base, childLayoutConfigurators: [FutureLayoutConfigurator] = []) {
         self.base = base
-        self.layout = layout ?? .init(base)
+        self.childLayoutConfigurators = childLayoutConfigurators
     }
     
 }
@@ -27,7 +32,11 @@ extension ViewProxy: UIViewProvider {
 }
 
 extension ViewProxy: FutureLayoutConfigurator {
-    func configureLayout() { layout.configureLayout() }
+    func configureLayout() {
+        childLayoutConfigurators.forEach {
+            $0.configureLayout()
+        }
+    }
 }
 
 public extension ViewProxy {

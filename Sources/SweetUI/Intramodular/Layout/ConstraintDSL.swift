@@ -6,140 +6,28 @@
 //  Copyright © 2020 @maximkrouk. All rights reserved.
 //
 
-func constraint(
-    _ anchorPair: Pair<NSLayoutDimension, NSLayoutDimension>,
-    compare: ConstraintDSL.Compare = .equal,
-    modifier: ConstraintDSL.DimensionModifier? = .none
-) -> NSLayoutConstraint {
-    switch modifier {
-    case .none:
-        switch compare {
-        case .less:
-            return anchorPair.first.constraint(lessThanOrEqualTo: anchorPair.second)
-        case .equal:
-            return anchorPair.first.constraint(equalTo: anchorPair.second)
-        case .greater:
-            return anchorPair.first.constraint(greaterThanOrEqualTo: anchorPair.second)
-        }
-    case .inset(let value):
-        switch compare {
-        case .less:
-            return anchorPair.first.constraint(lessThanOrEqualTo: anchorPair.second, constant: -value)
-        case .equal:
-            return anchorPair.first.constraint(equalTo: anchorPair.second, constant: -value)
-        case .greater:
-            return anchorPair.first.constraint(greaterThanOrEqualTo: anchorPair.second, constant: -value)
-        }
-    case .offset(let value):
-        switch compare {
-        case .less:
-            return anchorPair.first.constraint(lessThanOrEqualTo: anchorPair.second, constant: value)
-        case .equal:
-            return anchorPair.first.constraint(equalTo: anchorPair.second, constant: value)
-        case .greater:
-            return anchorPair.first.constraint(greaterThanOrEqualTo: anchorPair.second, constant: value)
-        }
-    case .multiplier(let value):
-        switch compare {
-        case .less:
-            return anchorPair.first.constraint(lessThanOrEqualTo: anchorPair.second, multiplier: value)
-        case .equal:
-            return anchorPair.first.constraint(equalTo: anchorPair.second, multiplier: value)
-        case .greater:
-            return anchorPair.first.constraint(greaterThanOrEqualTo: anchorPair.second, multiplier: value)
-        }
-    case .combined(multiplier: let multiplier, constant: let constant):
-        switch compare {
-        case .less:
-            return anchorPair.first.constraint(lessThanOrEqualTo: anchorPair.second, multiplier: multiplier, constant: constant)
-        case .equal:
-            return anchorPair.first.constraint(equalTo: anchorPair.second, multiplier: multiplier, constant: constant)
-        case .greater:
-            return anchorPair.first.constraint(greaterThanOrEqualTo: anchorPair.second, multiplier: multiplier, constant: constant)
-        }
+extension ConstraintDSL {
+    public enum DimensionModifier {
+        case inset(CGFloat)
+        case offset(CGFloat)
+        case multiplier(CGFloat)
+        case combined(multiplier: CGFloat, constant: CGFloat)
     }
-}
-
-func constraint(
-    _ anchorPair: Pair<NSLayoutXAxisAnchor, NSLayoutXAxisAnchor>,
-    compare: ConstraintDSL.Compare = .equal,
-    modifier: ConstraintDSL.AxisModifier? = .none
-) -> NSLayoutConstraint {
-    switch modifier {
-    case .none:
-        switch compare {
-        case .less:
-            return anchorPair.first.constraint(lessThanOrEqualTo: anchorPair.second)
-        case .equal:
-            return anchorPair.first.constraint(equalTo: anchorPair.second)
-        case .greater:
-            return anchorPair.first.constraint(greaterThanOrEqualTo: anchorPair.second)
-        }
-    case .inset(let value):
-        switch compare {
-        case .less:
-            return anchorPair.first.constraint(lessThanOrEqualTo: anchorPair.second, constant: -value)
-        case .equal:
-            return anchorPair.first.constraint(equalTo: anchorPair.second, constant: -value)
-        case .greater:
-            return anchorPair.first.constraint(greaterThanOrEqualTo: anchorPair.second, constant: -value)
-        }
-    case .offset(let value):
-        switch compare {
-        case .less:
-            return anchorPair.first.constraint(lessThanOrEqualTo: anchorPair.second, constant: value)
-        case .equal:
-            return anchorPair.first.constraint(equalTo: anchorPair.second, constant: value)
-        case .greater:
-            return anchorPair.first.constraint(greaterThanOrEqualTo: anchorPair.second, constant: value)
-        }
-    }
-}
-
-func constraint(
-    _ anchorPair: Pair<NSLayoutYAxisAnchor, NSLayoutYAxisAnchor>,
-    compare: ConstraintDSL.Compare = .equal,
-    modifier: ConstraintDSL.AxisModifier? = .none
-) -> NSLayoutConstraint {
-    switch modifier {
-    case .none:
-        switch compare {
-        case .less:
-            return anchorPair.first.constraint(lessThanOrEqualTo: anchorPair.second)
-        case .equal:
-            return anchorPair.first.constraint(equalTo: anchorPair.second)
-        case .greater:
-            return anchorPair.first.constraint(greaterThanOrEqualTo: anchorPair.second)
-        }
-    case .inset(let value):
-        switch compare {
-        case .less:
-            return anchorPair.first.constraint(lessThanOrEqualTo: anchorPair.second, constant: -value)
-        case .equal:
-            return anchorPair.first.constraint(equalTo: anchorPair.second, constant: -value)
-        case .greater:
-            return anchorPair.first.constraint(greaterThanOrEqualTo: anchorPair.second, constant: -value)
-        }
-    case .offset(let value):
-        switch compare {
-        case .less:
-            return anchorPair.first.constraint(lessThanOrEqualTo: anchorPair.second, constant: value)
-        case .equal:
-            return anchorPair.first.constraint(equalTo: anchorPair.second, constant: value)
-        case .greater:
-            return anchorPair.first.constraint(greaterThanOrEqualTo: anchorPair.second, constant: value)
-        }
+    
+    public enum AxisModifier {
+        case inset(CGFloat)
+        case offset(CGFloat)
     }
 }
 
 public struct ConstraintDSL {
-    enum Compare {
+    enum Compare: Equatable, Hashable {
         case less
         case equal
         case greater
     }
     
-    enum Single {
+    enum Single: Equatable, Hashable {
         case dimension(Dimension)
         case xAxis(XAxis)
         case yAxis(YAxis)
@@ -160,15 +48,7 @@ public struct ConstraintDSL {
         }
     }
     
-    
-    public enum DimensionModifier {
-        case inset(CGFloat)
-        case offset(CGFloat)
-        case multiplier(CGFloat)
-        case combined(multiplier: CGFloat, constant: CGFloat)
-    }
-    
-    enum Dimension {
+    enum Dimension: Equatable, Hashable {
         case width
         case height
         
@@ -196,18 +76,12 @@ public struct ConstraintDSL {
         }
     }
     
-    public enum AxisModifier {
-        case inset(CGFloat)
-        case offset(CGFloat)
-    }
-    
-    enum XAxis {
+    enum XAxis: Equatable, Hashable {
         case left
         case right
         case leading
         case trailing
-        case centerX
-        
+        case center
         
         func anchor(for view: UIView) -> NSLayoutXAxisAnchor {
             switch self {
@@ -215,7 +89,7 @@ public struct ConstraintDSL {
             case .right     : return view.rightAnchor
             case .leading   : return view.leadingAnchor
             case .trailing  : return view.trailingAnchor
-            case .centerX   : return view.centerXAnchor
+            case .center   : return view.centerXAnchor
             }
         }
         
@@ -236,16 +110,16 @@ public struct ConstraintDSL {
         }
     }
     
-    enum YAxis {
+    enum YAxis: Equatable, Hashable {
         case top
         case bottom
-        case centerY
+        case center
         
         func anchor(for view: UIView) -> NSLayoutYAxisAnchor {
             switch self {
             case .top       : return view.topAnchor
             case .bottom    : return view.bottomAnchor
-            case .centerY   : return view.centerYAnchor
+            case .center   : return view.centerYAnchor
             }
         }
         

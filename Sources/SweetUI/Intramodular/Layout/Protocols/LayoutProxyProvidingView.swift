@@ -9,7 +9,7 @@
 public protocol LayoutProxyProvidingView: UIView {}
 
 extension LayoutProxyProvidingView {
-    public var layout: LayoutProxy<Self> { .init(self) }
+    public var layout: LayoutProxy<Self, LayoutProxySteps.Initial> { .init(self) }
 }
 
 extension UIView: LayoutProxyProvidingView {}
