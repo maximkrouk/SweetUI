@@ -70,8 +70,8 @@ __SweetUI__ provides some proxies for interaction with your view's properties. Y
 
 SUILayout is available through SwiftPM
 
-```ruby
-.package(url: "https://github.com/maximkrouk/SweetUI.git", from: "1.0.0-beta.1.1")
+```swift
+.package(url: "https://github.com/maximkrouk/SweetUI.git", from: "1.0.0-beta.1.2")
 ```
 
 ```swift
