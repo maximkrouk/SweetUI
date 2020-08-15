@@ -5,7 +5,8 @@ import PackageDescription
 let package = Package(
     name: "SweetUI",
     platforms: [
-        .iOS(.v10)
+        .iOS(.v10),
+        //.macOS(.v10_11)
     ],
     products: [
         .library(
