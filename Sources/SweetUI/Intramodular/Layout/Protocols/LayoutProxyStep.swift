@@ -6,7 +6,6 @@
 //  Copyright © 2020 @maximkrouk. All rights reserved.
 //
 
-
 public protocol LayoutProxyStep {}
 
 public enum LayoutProxySteps {
