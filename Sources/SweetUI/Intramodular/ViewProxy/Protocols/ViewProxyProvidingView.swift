@@ -8,7 +8,7 @@
 
 import UICocoa
 
-protocol ViewProxyProvidingView: UIView {}
+public protocol ViewProxyProvidingView: UIView {}
 
 extension ViewProxyProvidingView {
     

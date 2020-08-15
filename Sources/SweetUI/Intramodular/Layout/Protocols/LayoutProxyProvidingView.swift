@@ -6,7 +6,7 @@
 //  Copyright © 2020 @maximkrouk. All rights reserved.
 //
 
-protocol LayoutProxyProvidingView: UIView {}
+public protocol LayoutProxyProvidingView: UIView {}
 
 extension LayoutProxyProvidingView {
     public var layout: LayoutProxy<Self> { .init(self) }
