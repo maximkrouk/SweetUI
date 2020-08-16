@@ -6,6 +6,8 @@
 //  Copyright © 2020 @maximkrouk. All rights reserved.
 //
 
+import UICocoa
+
 public struct ViewProxy<Base: UIView> {
     
     /// Stored view, managed by the DSL.
@@ -587,6 +589,12 @@ public extension ViewProxy {
 
 // MARK: - Subviews
 public extension ViewProxy {
+    
+    func body(@UIViewBuilder content: UIViewBuilder.Content) -> Self {
+        modified { base in
+            base.setBody(content().view)
+        }
+    }
     
     /// Adds subviews to a view.
     ///

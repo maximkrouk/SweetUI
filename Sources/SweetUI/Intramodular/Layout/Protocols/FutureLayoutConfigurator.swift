@@ -9,3 +9,17 @@
 protocol FutureLayoutConfigurator {
     func configureLayout()
 }
+
+struct FutureLayoutContainer: UIViewProvider & FutureLayoutConfigurator {
+    var view: UIView
+    var childConfigurators: [FutureLayoutConfigurator]
+    
+    init(view: UIView, childConfigurators: [FutureLayoutConfigurator] = []) {
+        self.view = view
+        self.childConfigurators = childConfigurators
+    }
+    
+    func configureLayout() {
+        childConfigurators.forEach { $0.configureLayout() }
+    }
+}

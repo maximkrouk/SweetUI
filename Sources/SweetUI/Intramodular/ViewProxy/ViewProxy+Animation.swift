@@ -11,6 +11,13 @@ import UICocoa
 #if os(iOS)
 
 public extension ViewProxy {
+    
+    @discardableResult
+    func animateLayer(using animation: (CALayer) -> CAKeyPathDrivenAnimation) -> Self {
+        modified { base in
+            animation(base.layer).run()
+        }
+    }
 
     /// Performs specified animations.
     ///

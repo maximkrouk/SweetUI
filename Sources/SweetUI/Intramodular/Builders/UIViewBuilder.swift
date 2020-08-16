@@ -11,15 +11,20 @@ public struct UIViewBuilder {
     public typealias Content = () -> UIViewProvider
     
     public static func buildBlock(_ content: UIViewProvider...) -> UIViewProvider {
-        guard content.count != 1 else { return content[0].view }
-        let view = UIView()
+        let containerView = UIView()
         content.forEach { provider in
-            view.ui.add(provider)
+            containerView.ui.add(provider)
         }
-        return view
+        return FutureLayoutContainer(
+            view: containerView,
+            childConfigurators: [
+                containerView
+                    .layout.edges.equalToSuperview()
+            ]
+        )
     }
     
-    public static func buildIf(_ content: UIViewProvider?) -> UIViewProvider { content ?? UIView() }
+    public static func buildIf(_ content: UIViewProvider?) -> UIViewProvider { content ?? UIView(frame: .zero) }
 
     public static func buildEither(first: UIViewProvider) -> UIViewProvider { first }
 

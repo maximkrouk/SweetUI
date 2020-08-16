@@ -13,7 +13,7 @@ public extension CGSize {
     /// Current screen size.
     static var screen: CGSize { CGRect.screen.size }
     
-    static func square(length: CGFloat) -> CGSize { .init(width: length, height: length) }
+    static func square(_ length: CGFloat) -> CGSize { .init(width: length, height: length) }
     
 }
 
