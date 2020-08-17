@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Buildable {}
+public protocol Buildable {}
 
 extension Buildable {
     public func with<Value>(_ keyPath: WritableKeyPath<Self, Value>, _ value: Value) -> Self {
