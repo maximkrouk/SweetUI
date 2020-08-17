@@ -6,6 +6,7 @@
 //  Copyright © 2020 @maximkrouk. All rights reserved.
 //
 
+@usableFromInline
 func modification<Object>(of object: Object, with transform: (inout Object) -> Void) -> Object {
     var _object = object
     transform(&_object)

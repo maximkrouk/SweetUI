@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 	s.name		= 'SweetUI'
 	s.module_name	= 'SweetUI'
-	s.version	= '1.0.0-beta.3.3'
+	s.version	= '1.0.0-beta.3.4'
 	s.summary	= 'Declarative UIKit wrapper inspired by SwiftUI'
 	s.swift_version = '5.2'
 	s.description	= 'Easy to use declarative UIKit wrapper inspired by SwiftUI'

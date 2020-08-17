@@ -1,12 +1,11 @@
 //
 //  KeyPath+Extension.swift
-//  PropertyWrapprs-tries
+//  SweetUI
 //
-//  Created by Maxim Krouk on 3/14/20.
-//  Copyright © 2020 Maxim Krouk. All rights reserved.
+//  Created by Maxim Krouk on 17/08/20.
+//  Copyright © 2020 @maximkrouk. All rights reserved.
 //
 
-// Objc-like string keypath from a Swifty one
 extension AnyKeyPath {
     /// Returns key path represented as a string
     public var asString: String? {

@@ -1,3 +1,11 @@
+//
+//  CAInfiniteKeyPathAnimation.swift
+//  SweetUI
+//
+//  Created by Maxim Krouk on 17/08/20.
+//  Copyright © 2020 @maximkrouk. All rights reserved.
+//
+
 import UIKit
 
 public final class CAInfiniteKeyPathAnimation<Layer: CALayer, Value>: CABasicAnimation, CAKeyPathDrivenAnimation {

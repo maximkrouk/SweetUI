@@ -1,8 +1,9 @@
 //
-//  File.swift
-//  
+//  UIViewController+Body.swift
+//  SweetUI
 //
-//  Created by Maxim Krouk on 8/17/20.
+//  Created by Maxim Krouk on 17/08/20.
+//  Copyright © 2020 @maximkrouk. All rights reserved.
 //
 
 import UICocoa

@@ -7,7 +7,7 @@
 //
 
 @_functionBuilder
-public struct UIViewBuilder {
+public enum UIViewBuilder {
     public typealias Content = () -> UIViewProvider
     
     public static func buildBlock(_ content: UIViewProvider...) -> UIViewProvider {
