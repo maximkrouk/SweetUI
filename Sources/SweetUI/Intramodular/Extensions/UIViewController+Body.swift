@@ -11,8 +11,8 @@ extension UIViewController {
     /// Sets a new view to a `view` property
     ///
     /// Note:
-    /// - Layout config for Layout and View proxies is dropped
-    public func setBody(content: () -> UIViewProvider) {
+    /// - UIViewBuilder wrapps your content into a containerView, so you should setup layout
+    public func setBody(@UIViewBuilder content: UIViewBuilder.Content) {
         setBody(content())
     }
     
@@ -30,9 +30,9 @@ extension UIView {
     ///
     /// Note:
     /// - This method removes all the subviews
-    /// - This method constrain content edges to self
-    /// - Layout config for Layout and View proxies is dropped
-    public func setBody(content: () -> UIViewProvider) {
+    /// - UIViewBuilder wrapps your content into a containerView, so you should setup layout
+    /// - This method constrain content edges of the containerView to self
+    public func setBody(@UIViewBuilder content: UIViewBuilder.Content) {
         setBody(content())
     }
     
