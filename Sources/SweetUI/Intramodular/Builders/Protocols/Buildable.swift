@@ -16,7 +16,7 @@ extension Buildable {
     }
 
     public func with(_ transform: (Self) -> Self) -> Self {
-        modification(of: self, with: transform)
+        transform(self)
     }
 }
 
