@@ -13,7 +13,9 @@ import UICocoa
 public extension ViewProxy {
     
     @discardableResult
-    func animateLayer(using animation: (CALayer) -> CAKeyPathDrivenAnimation) -> Self {
+    func animateLayer<Animation: CAKeyPathDrivenAnimation>(
+        using animation: (CALayer) -> Animation
+    ) -> Self {
         modified { base in
             animation(base.layer).run()
         }
