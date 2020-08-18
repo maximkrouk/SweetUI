@@ -18,7 +18,7 @@ public extension UIView {
     /// - Parameter content: Closure, that specifies subviews to be added to the view hierarcy after initialization.
     convenience init(@UIViewBuilder content: UIViewBuilder.Content) {
         self.init()
-        self.ui.add(content: content)
+        self.setBody(content())
     }
     
 }
