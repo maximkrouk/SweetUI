@@ -50,7 +50,7 @@ public struct Builder<T> {
     public struct BuildBlock<Value> {
         var builder: Builder
         var keyPath: WritableKeyPath<T, Value>
-        func callAsFunction(_ value: Value) -> Builder {
+        public func callAsFunction(_ value: Value) -> Builder {
             builder.set(keyPath, value)
         }
     }
