@@ -42,11 +42,16 @@ public struct Builder<Object> {
         }
     }
     
+    @dynamicMemberLookup
     public struct BuildBlock<Value> {
         var builder: Builder<Object>
         var keyPath: WritableKeyPath<Object, Value>
         public func callAsFunction(_ value: Value) -> Builder<Object> {
             builder.set(keyPath, value)
+        }
+        
+        public subscript<T>(dynamicMember keyPath: WritableKeyPath<Value, T>) -> BuildBlock<T> {
+            BuildBlock<T>(builder: builder, keyPath: self.keyPath.appending(path: keyPath))
         }
     }
     
