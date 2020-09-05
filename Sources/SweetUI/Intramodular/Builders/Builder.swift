@@ -8,6 +8,7 @@
 
 import UICocoa
 
+@dynamicMemberLookup
 public struct Builder<T> {
     private var initial: T
     private var transform: (T) -> T = { $0 }
@@ -57,6 +58,18 @@ public struct Builder<T> {
     }
     
     public func build() -> T { transform(initial) }
+    
+    public struct BuildBlock<Value> {
+        var builder: Builder
+        var keyPath: WritableKeyPath<T, Value>
+        func callAsFunction(_ value: Value) -> Builder {
+            builder.set(keyPath, value)
+        }
+    }
+    
+    public subscript<Value>(dynamicMember keyPath: WritableKeyPath<T, Value>) -> BuildBlock<Value> {
+        BuildBlock(builder: self, keyPath: keyPath)
+    }
     
 }
 
