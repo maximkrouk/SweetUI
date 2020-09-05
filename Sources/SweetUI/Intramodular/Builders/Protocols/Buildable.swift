@@ -12,11 +12,9 @@ public protocol Buildable {}
 
 extension Buildable {
     public func with<Value>(_ keyPath: WritableKeyPath<Self, Value>, _ value: Value) -> Self {
-        self.with(keyPath == value)
-    }
-
-    public func with(_ transform: (Self) -> Self) -> Self {
-        transform(self)
+        modification(of: self) { _self in
+            _self[keyPath: keyPath] = value
+        }
     }
 }
 
