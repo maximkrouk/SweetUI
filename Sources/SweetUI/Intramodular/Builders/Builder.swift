@@ -67,3 +67,7 @@ public struct Builder<Object> {
     }
     
 }
+
+extension Builder where Object: AnyObject {
+    public func apply() { _ = build() }
+}
