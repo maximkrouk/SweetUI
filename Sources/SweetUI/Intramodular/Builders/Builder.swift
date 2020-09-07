@@ -1,10 +1,4 @@
-//
-//  Builder.swift
-//  SweetUI
-//
-//  Created by Maxim Krouk on 17/08/20.
-//  Copyright © 2020 @maximkrouk. All rights reserved.
-//
+// Source: https://gist.github.com/maximkrouk/eede7171952e044492c1fa57291bcf94
 
 import UICocoa
 
@@ -42,21 +36,34 @@ public struct Builder<Object> {
         }
     }
     
-    @dynamicMemberLookup
-    public struct BuildBlock<Value> {
-        var builder: Builder<Object>
-        var keyPath: WritableKeyPath<Object, Value>
-        public func callAsFunction(_ value: Value) -> Builder<Object> {
-            builder.set(keyPath, value)
-        }
-        
-        public subscript<T>(dynamicMember keyPath: WritableKeyPath<Value, T>) -> BuildBlock<T> {
-            BuildBlock<T>(builder: builder, keyPath: self.keyPath.appending(path: keyPath))
-        }
+    public subscript<T>(dynamicMember keyPath: WritableKeyPath<Object, T>) -> CallableBuildBlock<T> {
+        CallableBuildBlock(
+            base: BuildBlock(
+                builder: self,
+                keyPath: .init(keyPath)
+            )
+        )
     }
     
-    public subscript<Value>(dynamicMember keyPath: WritableKeyPath<Object, Value>) -> BuildBlock<Value> {
-        BuildBlock(builder: self, keyPath: keyPath)
+    public subscript<T>(dynamicMember keyPath: ReferenceWritableKeyPath<Object, T>) -> CallableBuildBlock<T>
+    where T: AnyObject {
+        CallableBuildBlock(
+            base: BuildBlock(
+                builder: self,
+                keyPath: .init(keyPath)
+            )
+        )
+    }
+    
+    public subscript<T>(dynamicMember keyPath: KeyPath<Object, T>) -> BuildBlock<T>
+    where T: AnyObject {
+        BuildBlock<T>(
+            builder: self,
+            keyPath: FunctionalKeyPath(
+                embed: { value, root in root  },
+                extract: { root in root[keyPath: keyPath] }
+            )
+        )
     }
     
 }
