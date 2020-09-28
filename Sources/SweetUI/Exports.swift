@@ -6,4 +6,4 @@
 //  Copyright © 2020 @maximkrouk. All rights reserved.
 //
 
-@_exported import UICocoa
+@_exported import UIKit

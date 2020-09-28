@@ -6,7 +6,7 @@
 //  Copyright © 2020 @maximkrouk. All rights reserved.
 //
 
-import UICocoa
+import UIKit
 
 public extension CACornerMask {
     /// Set of corners.

@@ -5,8 +5,7 @@ import PackageDescription
 let package = Package(
     name: "SweetUI",
     platforms: [
-        .iOS(.v10),
-        //.macOS(.v10_11)
+        .iOS(.v10)
     ],
     products: [
         .library(
@@ -14,21 +13,7 @@ let package = Package(
             targets: ["SweetUI"]
         ),
     ],
-    dependencies: [
-        .package(url: "https://github.com/maximkrouk/UICocoa.git", from: "1.0.0")
-    ],
     targets: [
-        .target(
-            name: "SweetUI",
-            dependencies: [
-                .product(name: "UICocoa", package: "UICocoa")
-            ]
-        ),
-        .testTarget(
-            name: "SweetUITests",
-            dependencies: [
-                .target(name: "SweetUI")
-            ]
-        ),
+        .target(name: "SweetUI")
     ]
 )
