@@ -68,7 +68,7 @@ public struct Animation {
     /// A block to execute when the animations finish. This block has no return value and takes the following parameter:
     /// finalPosition
     /// The position where the animations stopped. Use this value to specify whether the animations stopped at their starting point, their end point, or their current position.
-    init(
+    public init(
         duration: TimeInterval = 0.3,
         delay: TimeInterval = 0,
         curve: UIView.AnimationCurve = .linear,
